@@ -1,5 +1,25 @@
 <?php 
 include_once "connect.php";
+
+if(isset($_POST["btn-entrar"])){
+    $nome = $_POST["nome"];
+    $senha = $_POST["senha"];
+    $sql = "SELECT nome, senha 
+    FROM usuarios 
+    WHERE nome = '$nome' AND senha = '$senha'";
+    $resultado = mysqli_query($connection, $sql);
+    $usuario = mysqli_fetch_assoc($resultado);
+
+    if(mysqli_num_rows($resultado) > 0){
+        if($senha === $usuario["senha"]){
+            header("Location: dashboard.php");
+        }else{
+            echo "Senha incorreta.";
+        }
+    }else{
+        echo "Utilizador não encontrado.";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -10,12 +30,12 @@ include_once "connect.php";
 </head>
 <body>
     <div class="box-login">
-        <div class="login">
+        <form action="login.php" method="post">
             <h2>Login</h2>
             <input type="text" name="nome" placeholder="Name">
             <input type="password" name="senha" placeholder="Password">
-            <input type="submit" name="btn-entrar" >
-        </div>
+            <button type="submit" name="btn-entrar">Entrar</button>
+        </form>
     </div>
 </body>
 </html>

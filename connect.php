@@ -1,10 +1,11 @@
 <?php 
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$data_base = "sistema";
-$connection = mysqli_connect($hostname, $username, $password, $data_base);
+$connection = mysqli_connect(
+    $hostname = "localhost",
+    $username = "root",
+    $password = "",
+    $data_base = "sistema",
+);
 if(!$connection){
-    die("Erro de conexão!"); 
+    die("Erro". mysqli_connect_error());
 }
 ?>

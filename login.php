@@ -1,25 +1,5 @@
 <?php 
-include_once "connect.php";
-
-if(isset($_POST["btn-entrar"])){
-    $nome = $_POST["nome"];
-    $senha = $_POST["senha"];
-    $sql = "SELECT nome, senha 
-    FROM usuarios 
-    WHERE nome = '$nome' AND senha = '$senha'";
-    $resultado = mysqli_query($connection, $sql);
-    $usuario = mysqli_fetch_assoc($resultado);
-
-    if(mysqli_num_rows($resultado) > 0){
-        if($senha === $usuario["senha"]){
-            header("Location: dashboard.php");
-        }else{
-            echo "Senha incorreta.";
-        }
-    }else{
-        echo "Utilizador não encontrado.";
-    }
-}
+include_once 'processar_login.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt">
